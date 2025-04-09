@@ -9,10 +9,10 @@ const GenAICopilot = () => {
     >
       <img 
         src="/lovable-uploads/9d91a4e4-bf57-43bb-ab0e-65df89e1f695.png" 
-        alt="GenAI Copilot" 
+        alt="Copilot" 
         className="mr-2 h-5 w-5" 
       />
-      Gen AI Copilot
+      Copilot
     </Button>
   );
 };
