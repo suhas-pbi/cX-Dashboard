@@ -8,10 +8,11 @@ const DashboardHeader = () => {
   return (
     <header className="flex items-center justify-between bg-white shadow-sm px-6 py-3 rounded-xl mb-6">
       <div className="flex items-center">
-        <div className="bg-gradient-to-r from-cloudmetrix-primary to-cloudmetrix-accent rounded-lg text-white font-bold py-1 px-3">
-          CM
-        </div>
-        <span className="ml-2 text-xl font-semibold text-cloudmetrix-baseText hidden md:inline-block">Cost Manager</span>
+        <img 
+          src="/lovable-uploads/76617818-3265-4577-82a9-e9777c2fae7f.png" 
+          alt="Cloudmetrix Logo" 
+          className="h-8"
+        />
       </div>
       
       <div className="relative flex-grow max-w-md mx-4">
