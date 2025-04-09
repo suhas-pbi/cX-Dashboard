@@ -8,11 +8,14 @@ const DashboardHeader = () => {
   return (
     <header className="flex items-center justify-between bg-white shadow-sm px-6 py-3 rounded-xl mb-6">
       <div className="flex items-center">
-        <img 
-          src="/lovable-uploads/76617818-3265-4577-82a9-e9777c2fae7f.png" 
-          alt="Cloudmetrix Logo" 
-          className="h-8"
-        />
+        <div className="relative">
+          <img 
+            src="/lovable-uploads/76617818-3265-4577-82a9-e9777c2fae7f.png" 
+            alt="Cloudmetrix Logo" 
+            className="h-12 w-auto" // Increased size from h-8 to h-12
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-violet-500 opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+        </div>
       </div>
       
       <div className="relative flex-grow max-w-md mx-4">
