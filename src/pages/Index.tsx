@@ -121,20 +121,20 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-cloudmetrix-backgroundTint">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       <div className="container mx-auto p-6">
         <DashboardHeader />
         
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Overview</h2>
+            <h2 className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Overview</h2>
             <div className="flex items-center">
-              <CalendarDays className="h-4 w-4 mr-2 text-gray-500" />
+              <CalendarDays className="h-4 w-4 mr-2 text-blue-500" />
               <Select
                 value={timePeriod}
                 onValueChange={setTimePeriod}
               >
-                <SelectTrigger className="w-[160px] h-9 bg-white">
+                <SelectTrigger className="w-[160px] h-9 bg-white border-blue-100">
                   <SelectValue placeholder="Select period" />
                 </SelectTrigger>
                 <SelectContent>
@@ -161,7 +161,7 @@ const Index = () => {
         </div>
         
         <div>
-          <h2 className="text-xl font-semibold mb-4">Our Tools</h2>
+          <h2 className="text-xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Our Tools</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {navigationTiles.map((tile, index) => (
               <NavigationTile

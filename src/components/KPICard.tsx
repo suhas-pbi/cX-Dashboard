@@ -31,10 +31,10 @@ const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon, timePerio
   };
   
   return (
-    <div className="kpi-card animate-fade-in">
+    <div className="kpi-card bg-gradient-to-br from-white to-blue-50 animate-fade-in">
       <div className="flex justify-between items-start mb-3">
         <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-        <div className="text-cloudmetrix-primary">{icon}</div>
+        <div className="text-blue-500 bg-blue-50 p-2 rounded-lg">{icon}</div>
       </div>
       <div className="flex justify-between items-end">
         <div>
