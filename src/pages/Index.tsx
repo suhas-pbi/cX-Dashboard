@@ -1,7 +1,6 @@
 
 import React from 'react';
 import DashboardHeader from '@/components/DashboardHeader';
-import Sidebar from '@/components/Sidebar';
 import KPICard from '@/components/KPICard';
 import NavigationTile from '@/components/NavigationTile';
 import GenAICopilot from '@/components/GenAICopilot';
@@ -65,41 +64,38 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-cloudmetrix-backgroundTint">
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 p-6">
-          <DashboardHeader />
-          
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Overview</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {kpiData.map((kpi, index) => (
-                <KPICard
-                  key={index}
-                  title={kpi.title}
-                  value={kpi.value}
-                  change={kpi.change}
-                  icon={kpi.icon}
-                />
-              ))}
-            </div>
+      <div className="container mx-auto p-6">
+        <DashboardHeader />
+        
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Overview</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {kpiData.map((kpi, index) => (
+              <KPICard
+                key={index}
+                title={kpi.title}
+                value={kpi.value}
+                change={kpi.change}
+                icon={kpi.icon}
+              />
+            ))}
           </div>
-          
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Cloud Management</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {navigationTiles.map((tile, index) => (
-                <NavigationTile
-                  key={index}
-                  title={tile.title}
-                  icon={tile.icon}
-                />
-              ))}
-            </div>
-          </div>
-          
-          <GenAICopilot />
         </div>
+        
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Our Tools</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {navigationTiles.map((tile, index) => (
+              <NavigationTile
+                key={index}
+                title={tile.title}
+                icon={tile.icon}
+              />
+            ))}
+          </div>
+        </div>
+        
+        <GenAICopilot />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const DashboardHeader = () => {
         <div className="bg-gradient-to-r from-cloudmetrix-primary to-cloudmetrix-accent rounded-lg text-white font-bold py-1 px-3">
           CM
         </div>
-        <span className="ml-2 text-xl font-semibold text-cloudmetrix-baseText hidden md:inline-block">CloudMetrix</span>
+        <span className="ml-2 text-xl font-semibold text-cloudmetrix-baseText hidden md:inline-block">Cost Manager</span>
       </div>
       
       <div className="relative flex-grow max-w-md mx-4">
