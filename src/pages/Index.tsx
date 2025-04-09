@@ -104,18 +104,22 @@ const Index = () => {
     { 
       title: 'Unified Cost Analysis', 
       icon: <BarChart3 className="h-8 w-8" />,
+      path: '/cost-analysis'
     },
     { 
       title: 'Budgeting & Observability', 
       icon: <Activity className="h-8 w-8" />,
+      path: '/budgeting'
     },
     { 
       title: 'Recommender Engine', 
       icon: <LineChart className="h-8 w-8" />,
+      path: '/recommender'
     },
     { 
       title: 'Executive Dashboard', 
       icon: <BarChartHorizontal className="h-8 w-8" />,
+      path: '/executive'
     },
   ];
 
@@ -167,6 +171,7 @@ const Index = () => {
                 key={index}
                 title={tile.title}
                 icon={tile.icon}
+                path={tile.path}
               />
             ))}
           </div>

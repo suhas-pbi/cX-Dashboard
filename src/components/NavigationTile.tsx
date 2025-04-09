@@ -1,24 +1,37 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface NavigationTileProps {
   title: string;
   icon: React.ReactNode;
-  backgroundColor?: string;
+  path?: string;
 }
 
-const NavigationTile: React.FC<NavigationTileProps> = ({ 
-  title, 
-  icon,
-  backgroundColor = 'bg-white'
-}) => {
-  return (
-    <div className="nav-tile bg-gradient-to-br from-white to-blue-50 animate-fade-in group">
-      <div className="text-blue-500 bg-blue-50 p-4 rounded-full mb-3 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors duration-300">
+const NavigationTile = ({ title, icon, path = "#" }: NavigationTileProps) => {
+  const content = (
+    <>
+      <div className="text-cloudmetrix-primary">
         {icon}
       </div>
-      <h3 className="font-medium text-center text-sm md:text-base">{title}</h3>
-    </div>
+      <h3 className="text-cloudmetrix-baseText font-semibold text-center">
+        {title}
+      </h3>
+    </>
+  );
+
+  if (path === "#") {
+    return (
+      <div className="nav-tile">
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <Link to={path} className="nav-tile">
+      {content}
+    </Link>
   );
 };
 
