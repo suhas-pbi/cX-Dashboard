@@ -14,7 +14,7 @@ import {
   LayoutDashboard, 
   SearchCheck 
 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -33,31 +33,29 @@ const Sidebar = () => {
       <div className="mb-8 bg-white p-2 rounded-lg">
         <div className="font-bold text-cloudmetrix-accent text-sm">CM</div>
       </div>
-      <TooltipProvider>
-        <nav className="flex flex-col items-center space-y-6">
-          {menuItems.map((item, index) => {
-            const isActive = location.pathname === item.path;
-            
-            return (
-              <Tooltip key={index}>
-                <TooltipTrigger asChild>
-                  <Link 
-                    to={item.path} 
-                    className={`p-2 rounded-md transition-colors duration-200 ${
-                      isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20'
-                    }`}
-                  >
-                    <item.icon className="h-5 w-5" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="right">
-                  <p>{item.label}</p>
-                </TooltipContent>
-              </Tooltip>
-            );
-          })}
-        </nav>
-      </TooltipProvider>
+      <nav className="flex flex-col items-center space-y-6">
+        {menuItems.map((item, index) => {
+          const isActive = location.pathname === item.path;
+          
+          return (
+            <Tooltip key={index}>
+              <TooltipTrigger asChild>
+                <Link 
+                  to={item.path} 
+                  className={`p-2 rounded-md transition-colors duration-200 ${
+                    isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20'
+                  }`}
+                >
+                  <item.icon className="h-5 w-5" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <p>{item.label}</p>
+              </TooltipContent>
+            </Tooltip>
+          );
+        })}
+      </nav>
     </div>
   );
 };

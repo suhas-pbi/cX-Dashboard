@@ -11,7 +11,7 @@ interface NavigationTileProps {
 const NavigationTile = ({ title, icon, path = "#" }: NavigationTileProps) => {
   const content = (
     <>
-      <div className="text-cloudmetrix-primary">
+      <div className="text-cloudmetrix-primary mb-3">
         {icon}
       </div>
       <h3 className="text-cloudmetrix-baseText font-semibold text-center">
@@ -22,14 +22,14 @@ const NavigationTile = ({ title, icon, path = "#" }: NavigationTileProps) => {
 
   if (path === "#") {
     return (
-      <div className="nav-tile">
+      <div className="nav-tile bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow duration-200 h-36">
         {content}
       </div>
     );
   }
 
   return (
-    <Link to={path} className="nav-tile">
+    <Link to={path} className="nav-tile bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow duration-200 h-36">
       {content}
     </Link>
   );
