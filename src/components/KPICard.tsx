@@ -7,12 +7,28 @@ interface KPICardProps {
   value: string;
   change: number;
   icon: React.ReactNode;
+  timePeriod: string;
 }
 
-const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon }) => {
+const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon, timePeriod }) => {
   const isPositive = change >= 0;
   const Arrow = isPositive ? ArrowUp : ArrowDown;
   const changeClass = isPositive ? 'text-emerald-600' : 'text-rose-500';
+  
+  const getTimeText = () => {
+    switch(timePeriod) {
+      case 'week':
+        return 'From Last Week';
+      case 'month':
+        return 'From Last Month';
+      case 'quarter':
+        return 'From Last Quarter';
+      case 'year':
+        return 'From Last Year';
+      default:
+        return 'From Last Month';
+    }
+  };
   
   return (
     <div className="kpi-card animate-fade-in">
@@ -26,7 +42,7 @@ const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon }) => {
           <div className={`flex items-center ${changeClass} text-sm`}>
             <Arrow className="h-3 w-3 mr-1" />
             <span>{Math.abs(change)}%</span>
-            <span className="text-gray-500 ml-1 font-normal">From Last Month</span>
+            <span className="text-gray-500 ml-1 font-normal">{getTimeText()}</span>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import DashboardHeader from '@/components/DashboardHeader';
 import KPICard from '@/components/KPICard';
 import NavigationTile from '@/components/NavigationTile';
@@ -26,32 +26,80 @@ import {
 const Index = () => {
   const [timePeriod, setTimePeriod] = useState("month");
 
-  const kpiData = [
-    { 
-      title: 'Total Cost', 
-      value: '$325K', 
-      change: 3.7, 
-      icon: <DollarSign className="h-5 w-5" /> 
-    },
-    { 
-      title: 'Savings Opportunity', 
-      value: '$25K', 
-      change: 1.7, 
-      icon: <Target className="h-5 w-5" /> 
-    },
-    { 
-      title: '% Budget Consumed', 
-      value: '84%', 
-      change: 4.6, 
-      icon: <PieChart className="h-5 w-5" /> 
-    },
-    { 
-      title: 'Variance %', 
-      value: '12%', 
-      change: -1.9, 
-      icon: <TrendingUp className="h-5 w-5" /> 
-    },
-  ];
+  // Generate random KPI data based on time period
+  const kpiData = useMemo(() => {
+    // Generate some random variations based on timeperiod
+    const getRandomValue = (base: number, variance: number) => {
+      return (base + (Math.random() * variance * 2 - variance)).toFixed(1);
+    };
+    
+    const getRandomDollar = (min: number, max: number) => {
+      const value = Math.floor(Math.random() * (max - min + 1) + min);
+      return `$${value}K`;
+    };
+
+    // Different base values for different time periods
+    let costValue, savingsValue, budgetValue, varianceChange;
+    
+    switch(timePeriod) {
+      case 'week':
+        costValue = getRandomDollar(75, 110);
+        savingsValue = getRandomDollar(5, 15);
+        budgetValue = `${Math.floor(Math.random() * 25 + 70)}%`;
+        varianceChange = -Number(getRandomValue(1.2, 0.8));
+        break;
+      case 'month':
+        costValue = getRandomDollar(280, 350);
+        savingsValue = getRandomDollar(20, 30);
+        budgetValue = `${Math.floor(Math.random() * 15 + 80)}%`;
+        varianceChange = -Number(getRandomValue(2.0, 1.0));
+        break;
+      case 'quarter':
+        costValue = getRandomDollar(800, 950);
+        savingsValue = getRandomDollar(60, 90);
+        budgetValue = `${Math.floor(Math.random() * 10 + 85)}%`;
+        varianceChange = Number(getRandomValue(2.5, 1.5));
+        break;
+      case 'year':
+        costValue = getRandomDollar(3000, 3800);
+        savingsValue = getRandomDollar(200, 350);
+        budgetValue = `${Math.floor(Math.random() * 8 + 90)}%`;
+        varianceChange = Number(getRandomValue(4.0, 2.0));
+        break;
+      default:
+        costValue = getRandomDollar(280, 350);
+        savingsValue = getRandomDollar(20, 30);
+        budgetValue = `${Math.floor(Math.random() * 15 + 80)}%`;
+        varianceChange = -Number(getRandomValue(2.0, 1.0));
+    }
+
+    return [
+      { 
+        title: 'Total Cost', 
+        value: costValue, 
+        change: Number(getRandomValue(3.5, 1.2)), 
+        icon: <DollarSign className="h-5 w-5" /> 
+      },
+      { 
+        title: 'Savings Opportunity', 
+        value: savingsValue, 
+        change: Number(getRandomValue(1.5, 0.8)), 
+        icon: <Target className="h-5 w-5" /> 
+      },
+      { 
+        title: '% Budget Consumed', 
+        value: budgetValue, 
+        change: Number(getRandomValue(4.2, 1.8)), 
+        icon: <PieChart className="h-5 w-5" /> 
+      },
+      { 
+        title: 'Variance %', 
+        value: `${Math.abs(Number(varianceChange.toFixed(1)))}%`, 
+        change: varianceChange, 
+        icon: <TrendingUp className="h-5 w-5" /> 
+      },
+    ];
+  }, [timePeriod]);
 
   const navigationTiles = [
     { 
@@ -106,6 +154,7 @@ const Index = () => {
                 value={kpi.value}
                 change={kpi.change}
                 icon={kpi.icon}
+                timePeriod={timePeriod}
               />
             ))}
           </div>
