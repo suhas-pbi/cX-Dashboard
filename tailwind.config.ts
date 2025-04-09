@@ -63,14 +63,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// CloudMetrix custom colors
+				// CloudMetrix custom colors - updated for professional aesthetic
 				cloudmetrix: {
-					primary: "#0099F9",
-					accent: "#185395",
-					highlight: "#66C8FF",
-					backgroundTint: "#E6F5FE",
-					neutralBg: "#E1F1F1",
-					baseText: "#101215",
+					primary: "#4A6FA5",      // Rich blue
+					accent: "#2C3D55",       // Deep navy
+					highlight: "#6B98D4",    // Bright blue highlight
+					backgroundTint: "#F7FAFD", // Subtle blue-tinted background
+					neutralBg: "#EDF2F7",    // Light gray with blue undertone
+					baseText: "#1A202C",     // Dark gray-blue text
 				}
 			},
 			borderRadius: {

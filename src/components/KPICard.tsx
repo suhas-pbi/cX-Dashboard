@@ -12,13 +12,13 @@ interface KPICardProps {
 const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon }) => {
   const isPositive = change >= 0;
   const Arrow = isPositive ? ArrowUp : ArrowDown;
-  const changeClass = isPositive ? 'text-green-600' : 'text-red-500';
+  const changeClass = isPositive ? 'text-emerald-600' : 'text-rose-500';
   
   return (
     <div className="kpi-card animate-fade-in">
       <div className="flex justify-between items-start mb-3">
         <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-        <div className="text-cloudmetrix-accent">{icon}</div>
+        <div className="text-cloudmetrix-primary">{icon}</div>
       </div>
       <div className="flex justify-between items-end">
         <div>
