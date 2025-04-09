@@ -26,6 +26,7 @@ const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon }) => {
           <div className={`flex items-center ${changeClass} text-sm`}>
             <Arrow className="h-3 w-3 mr-1" />
             <span>{Math.abs(change)}%</span>
+            <span className="text-gray-500 ml-1 font-normal">From Last Month</span>
           </div>
         </div>
       </div>

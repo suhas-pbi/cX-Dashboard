@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import DashboardHeader from '@/components/DashboardHeader';
 import KPICard from '@/components/KPICard';
 import NavigationTile from '@/components/NavigationTile';
@@ -12,10 +12,20 @@ import {
   Target, 
   TrendingUp,
   Activity,
-  BarChartHorizontal
+  BarChartHorizontal,
+  CalendarDays,
 } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Index = () => {
+  const [timePeriod, setTimePeriod] = useState("month");
+
   const kpiData = [
     { 
       title: 'Total Cost', 
@@ -68,7 +78,26 @@ const Index = () => {
         <DashboardHeader />
         
         <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">Overview</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">Overview</h2>
+            <div className="flex items-center">
+              <CalendarDays className="h-4 w-4 mr-2 text-gray-500" />
+              <Select
+                value={timePeriod}
+                onValueChange={setTimePeriod}
+              >
+                <SelectTrigger className="w-[160px] h-9 bg-white">
+                  <SelectValue placeholder="Select period" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="week">Week</SelectItem>
+                  <SelectItem value="month">Month</SelectItem>
+                  <SelectItem value="quarter">Quarter</SelectItem>
+                  <SelectItem value="year">Year</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {kpiData.map((kpi, index) => (
               <KPICard
