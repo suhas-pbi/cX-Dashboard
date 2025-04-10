@@ -67,7 +67,7 @@ const Sidebar = () => {
               <Link 
                 key={index}
                 to={item.path} 
-                className={`flex items-center px-4 py-3 mx-2 rounded-md transition-colors duration-200 ${
+                className={`flex items-center px-4 py-3 mx-2 rounded-md transition-colors duration-200 whitespace-nowrap ${
                   isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20 text-white'
                 }`}
               >
