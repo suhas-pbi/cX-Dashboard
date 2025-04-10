@@ -52,11 +52,9 @@ const Sidebar = () => {
           )}
         </button>
         
-        {/* Logo area */}
+        {/* Logo area - removed the CloudMetrix text */}
         <div className="p-4 mb-6 mt-4">
-          <h2 className={`text-white font-semibold text-lg transition-opacity duration-300 ${
-            expanded ? 'opacity-100' : 'opacity-0'
-          }`}>CloudMetrix</h2>
+          {/* CloudMetrix text has been removed from here */}
         </div>
         
         <nav className="flex-1 py-6 flex flex-col space-y-4">
