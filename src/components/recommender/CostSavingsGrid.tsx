@@ -25,7 +25,7 @@ interface ResourceCardProps {
 const ResourceCard = ({ icon: Icon, iconColor, name, savings, bgColor }: ResourceCardProps) => {
   return (
     <Card 
-      className="transition-all duration-300 hover:shadow-md hover:translate-y-[-4px] border border-gray-100 bg-white"
+      className="transition-all duration-300 hover:shadow-md hover:translate-y-[-4px] border border-gray-100 bg-white rounded-xl"
       onClick={() => console.log(`Clicked on ${name}`)}
     >
       <CardContent className="p-5">
@@ -98,7 +98,7 @@ const CostSavingsGrid: React.FC<CostSavingsGridProps> = ({ selectedServices }) =
     : resourceData.filter(resource => selectedServices.includes(resource.name));
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3">
       {filteredResources.map((resource) => (
         <ResourceCard 
           key={resource.name}
