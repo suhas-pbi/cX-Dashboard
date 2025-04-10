@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   LineChart,
@@ -111,22 +112,22 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
       lineComponents = (
         <>
           <Line
-            type="monotone"
+            type="monotoneX"
             dataKey="thisYear"
             name="This Year"
             stroke="#4A6FA5"
             strokeWidth={2}
-            dot={{ r: 3 }}
-            activeDot={{ r: 5 }}
+            dot={{ r: 2 }}
+            activeDot={{ r: 4 }}
           />
           <Line
-            type="monotone"
+            type="monotoneX"
             dataKey="lastYear"
             name="Last Year"
             stroke="#7E69AB"
             strokeWidth={2}
-            dot={{ r: 3 }}
-            activeDot={{ r: 5 }}
+            dot={{ r: 2 }}
+            activeDot={{ r: 4 }}
             strokeDasharray="5 5"
           />
         </>
@@ -136,13 +137,13 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
       data = generateYoYData();
       lineComponents = (
         <Line
-          type="monotone"
+          type="monotoneX"
           dataKey="cost"
           name="Cost"
           stroke="#4A6FA5"
           strokeWidth={2}
-          dot={{ r: 3 }}
-          activeDot={{ r: 5 }}
+          dot={{ r: 2 }}
+          activeDot={{ r: 4 }}
         />
       );
       break;
@@ -151,13 +152,13 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
       data = generateDailyData();
       lineComponents = (
         <Line
-          type="monotone"
+          type="monotoneX"
           dataKey="cost"
           name="Cost"
           stroke="#4A6FA5"
           strokeWidth={2}
-          dot={{ r: 3 }}
-          activeDot={{ r: 5 }}
+          dot={{ r: 2 }}
+          activeDot={{ r: 4 }}
         />
       );
   }

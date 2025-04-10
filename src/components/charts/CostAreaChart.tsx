@@ -89,31 +89,31 @@ const CostAreaChart = () => {
         />
         <Legend />
         <Line 
-          type="monotone" 
+          type="monotoneX" 
           dataKey="projected" 
           name="Projected Cost"
           stroke="#6b7280"
           strokeWidth={2}
-          dot={{ r: 4 }}
-          activeDot={{ r: 6 }}
+          dot={{ r: 2 }}
+          activeDot={{ r: 4 }}
         />
         <Line 
-          type="monotone" 
+          type="monotoneX" 
           dataKey="actual" 
           name="Actual Optimized Cost"
           stroke="#4A6FA5" 
           strokeWidth={2}
-          dot={{ r: 4 }}
-          activeDot={{ r: 6 }}
+          dot={{ r: 2 }}
+          activeDot={{ r: 4 }}
         />
         <Line 
-          type="monotone" 
+          type="monotoneX" 
           dataKey="savings" 
           name="Savings Realized"
           stroke="#4b5563" 
           strokeWidth={2}
-          dot={{ r: 4 }}
-          activeDot={{ r: 6 }}
+          dot={{ r: 2 }}
+          activeDot={{ r: 4 }}
         />
       </LineChart>
     </ChartContainer>
