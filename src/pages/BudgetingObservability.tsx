@@ -79,11 +79,11 @@ const BudgetingObservability = () => {
             setSelectedSubscription={setSelectedSubscription}
           />
           
-          {/* Section 2: Threshold Chart */}
-          <ThresholdChart budgetValue={budgetValue} />
-          
-          {/* Section 3: Alert Configuration */}
-          <AlertsConfiguration budgetValue={budgetValue} />
+          {/* Section 2 & 3: Threshold Chart and Alerts Configuration side-by-side */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <ThresholdChart budgetValue={budgetValue} />
+            <AlertsConfiguration budgetValue={budgetValue} />
+          </div>
           
           {/* Section 4: Anomalies Table */}
           <AnomaliesTable />
