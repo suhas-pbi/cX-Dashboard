@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 // Lazily load pages
 const Index = React.lazy(() => import("./pages/Index"));
 const UnifiedCostAnalysis = React.lazy(() => import("./pages/UnifiedCostAnalysis"));
+const BudgetingObservability = React.lazy(() => import("./pages/BudgetingObservability"));
 
 const PageLoader = () => (
   <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
@@ -48,6 +49,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/cost-analysis" element={<UnifiedCostAnalysis />} />
+            <Route path="/budgeting" element={<BudgetingObservability />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
