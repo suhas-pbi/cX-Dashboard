@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { ArrowUp, ArrowDown } from 'lucide-react';
+import { ArrowUp, ArrowDown, DollarSign, LineChart, Target, Activity } from 'lucide-react';
 
 interface KPICardProps {
   title: string;
   value: string;
   change: number;
-  icon: React.ReactNode;
+  icon: React.ReactNode | string;
   timePeriod: string;
 }
 
@@ -29,12 +29,29 @@ const KPICard: React.FC<KPICardProps> = ({ title, value, change, icon, timePerio
         return 'From Last Month';
     }
   };
+
+  // Choose icon based on string name or use the provided ReactNode
+  const renderIcon = () => {
+    if (typeof icon === 'string') {
+      switch(icon) {
+        case 'dollar':
+          return <DollarSign className="h-5 w-5" />;
+        case 'chart':
+          return <LineChart className="h-5 w-5" />;
+        case 'target':
+          return <Target className="h-5 w-5" />;
+        default:
+          return <Activity className="h-5 w-5" />;
+      }
+    }
+    return icon;
+  };
   
   return (
     <div className="kpi-card bg-gradient-to-br from-white to-blue-50 animate-fade-in">
       <div className="flex justify-between items-start mb-3">
         <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-        <div className="text-blue-500 bg-blue-50 p-2 rounded-lg">{icon}</div>
+        <div className="text-blue-500 bg-blue-50 p-2 rounded-lg">{renderIcon()}</div>
       </div>
       <div className="flex justify-between items-end">
         <div>

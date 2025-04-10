@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 
 interface CostCardProps {
   title: string;
@@ -10,6 +10,10 @@ interface CostCardProps {
 }
 
 const CostCard = ({ title, value, change, trend }: CostCardProps) => {
+  const isPositive = change >= 0;
+  const Arrow = isPositive ? ArrowUp : ArrowDown;
+  const changeClass = isPositive ? 'text-emerald-600' : 'text-rose-500';
+
   // Format SVG path for mini chart
   const createSvgPath = (data: number[]) => {
     if (data.length === 0) return '';
@@ -27,23 +31,23 @@ const CostCard = ({ title, value, change, trend }: CostCardProps) => {
   };
 
   return (
-    <div className="kpi-card flex flex-col justify-between h-32 relative overflow-hidden">
-      <div>
-        <h3 className="text-sm text-gray-500 mb-1">{title}</h3>
-        <div className="flex items-center justify-between">
-          <p className="text-2xl font-semibold">{value}</p>
-          <div className={`flex items-center text-sm ${change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-            {change >= 0 ? (
-              <ArrowUpIcon className="h-4 w-4 mr-1" />
-            ) : (
-              <ArrowDownIcon className="h-4 w-4 mr-1" />
-            )}
-            <span>{Math.abs(change)}%</span>
-          </div>
+    <div className="kpi-card bg-gradient-to-br from-white to-blue-50 animate-fade-in">
+      <div className="flex justify-between items-start mb-3">
+        <h3 className="text-sm font-medium text-gray-500">{title}</h3>
+        <div className="text-blue-500 bg-blue-50 p-2 rounded-lg">
+          {isPositive ? <ArrowUp className="h-5 w-5" /> : <ArrowDown className="h-5 w-5" />}
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <p className="text-2xl font-bold mb-1">{value}</p>
+        <div className={`flex items-center ${changeClass} text-sm`}>
+          <Arrow className="h-3 w-3 mr-1" />
+          <span>{Math.abs(change)}%</span>
+          <span className="text-gray-500 ml-1 font-normal">From Last Month</span>
         </div>
       </div>
       
-      {/* Mini trend chart */}
+      {/* Mini trend chart (positioned at bottom) */}
       <div className="absolute bottom-0 left-0 right-0 h-10 opacity-30">
         <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path
@@ -52,7 +56,6 @@ const CostCard = ({ title, value, change, trend }: CostCardProps) => {
             stroke={change >= 0 ? "#10B981" : "#EF4444"}
             strokeWidth="2"
           />
-          {/* Area under the path */}
           <path
             d={`${createSvgPath(trend)} L100,100 L0,100 Z`}
             fill={change >= 0 ? "rgba(16, 185, 129, 0.1)" : "rgba(239, 68, 68, 0.1)"}
