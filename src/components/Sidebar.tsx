@@ -26,7 +26,7 @@ const Sidebar = () => {
   return (
     <div className="fixed left-0 top-0 h-screen z-10 bg-cloudmetrix-accent shadow-lg">
       <div className="h-full flex items-center">
-        <nav className="py-4 flex flex-col space-y-6">
+        <nav className="py-6 flex flex-col space-y-8">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             
@@ -35,7 +35,7 @@ const Sidebar = () => {
                 <TooltipTrigger asChild>
                   <Link 
                     to={item.path} 
-                    className={`flex items-center p-2 rounded-md transition-colors duration-200 ${
+                    className={`flex items-center p-3 mx-1 rounded-md transition-colors duration-200 ${
                       isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20 text-white'
                     }`}
                   >
