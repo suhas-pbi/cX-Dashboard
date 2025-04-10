@@ -4,7 +4,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
@@ -20,34 +19,41 @@ const data = [
   { name: 'Load Balancers', value: 3 },
 ];
 
-// Colors for the pie chart segments
-const COLORS = ['#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#e879f9'];
+// More muted colors for the pie chart segments
+const COLORS = [
+  '#4A6FA5', // CloudMetrix primary
+  '#6B98D4', // CloudMetrix highlight
+  '#8E9196', // Neutral Gray
+  '#7E69AB', // Secondary Purple
+  '#6B7280', // Gray
+  '#9CA3AF'  // Light Gray
+];
 
 // Chart configuration
 const chartConfig = {
   compute: {
     label: "Compute",
-    color: "#3b82f6",
+    color: "#4A6FA5",
   },
   storage: {
     label: "Storage",
-    color: "#6366f1",
+    color: "#6B98D4",
   },
   networking: {
     label: "Networking",
-    color: "#8b5cf6",
+    color: "#8E9196",
   },
   database: {
     label: "Database",
-    color: "#a855f7",
+    color: "#7E69AB",
   },
   aiml: {
     label: "AI/ML Services",
-    color: "#d946ef",
+    color: "#6B7280",
   },
   loadbalancers: {
     label: "Load Balancers",
-    color: "#e879f9",
+    color: "#9CA3AF",
   },
 };
 
@@ -88,7 +94,6 @@ const CostPieChart = () => {
             ))}
           </Pie>
           <Tooltip content={<CustomTooltip />} />
-          <Legend layout="vertical" align="right" verticalAlign="middle" />
         </PieChart>
       </div>
     </ChartContainer>

@@ -20,7 +20,6 @@ import TopCostingFactorsChart from '@/components/charts/TopCostingFactorsChart';
 const UnifiedCostAnalysis = () => {
   // State for slicers
   const [selectedYear, setSelectedYear] = useState("2025");
-  const [selectedTimeHierarchy, setSelectedTimeHierarchy] = useState("Q1");
   const [selectedServices, setSelectedServices] = useState<string[]>(["All"]);
   const [timeToggle, setTimeToggle] = useState("daily");
   const [topN, setTopN] = useState("5");
@@ -45,21 +44,6 @@ const UnifiedCostAnalysis = () => {
       change: 12.5,
       trend: [2, 4, 6, 8, 7, 9, 8, 10, 11]
     }
-  ];
-
-  // Time hierarchy options
-  const timeHierarchyOptions = [
-    { label: "Q1", value: "Q1" },
-    { label: "January", value: "January" },
-    { label: "W1", value: "W1" },
-    { label: "W2", value: "W2" },
-    { label: "W3", value: "W3" },
-    { label: "W4", value: "W4" },
-    { label: "February", value: "February" },
-    { label: "March", value: "March" },
-    { label: "Q2", value: "Q2" },
-    { label: "Q3", value: "Q3" },
-    { label: "Q4", value: "Q4" }
   ];
 
   // Service filter options
@@ -99,11 +83,20 @@ const UnifiedCostAnalysis = () => {
         <div className="container mx-auto p-6">
           <DashboardHeader />
           
+          {/* Page Title */}
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-cloudmetrix-accent">Unified Cost Analysis</h1>
+          </div>
+          
           {/* Slicer Section */}
           <div className="bg-white rounded-xl p-4 mb-6 shadow-sm">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-blue-500" />
+            <div className="flex flex-wrap items-center justify-start gap-8">
+              {/* Year Selector */}
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium text-gray-600 flex items-center gap-1">
+                  <Calendar className="h-4 w-4 text-blue-500" />
+                  Year
+                </label>
                 <Select
                   value={selectedYear}
                   onValueChange={setSelectedYear}
@@ -119,31 +112,18 @@ const UnifiedCostAnalysis = () => {
                 </Select>
               </div>
               
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-blue-500" />
-                <Select
-                  value={selectedTimeHierarchy}
-                  onValueChange={setSelectedTimeHierarchy}
-                >
-                  <SelectTrigger className="w-[180px] h-9 bg-white border-blue-100">
-                    <SelectValue placeholder="Time Period" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {timeHierarchyOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <Filter className="h-4 w-4 text-blue-500" />
+              {/* Services Filter */}
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium text-gray-600 flex items-center gap-1">
+                  <Filter className="h-4 w-4 text-blue-500" />
+                  Services
+                </label>
                 <div className="relative">
                   <button 
-                    className="flex items-center gap-2 px-3 py-2 bg-white border border-blue-100 rounded-md text-sm"
+                    className="flex items-center gap-2 px-3 py-2 bg-white border border-blue-100 rounded-md text-sm h-9 w-[180px]"
                     onClick={() => document.getElementById('serviceDropdown')?.classList.toggle('hidden')}
                   >
-                    Services <ChevronDown className="h-4 w-4" />
+                    Services <ChevronDown className="h-4 w-4 ml-auto" />
                   </button>
                   <div id="serviceDropdown" className="hidden absolute z-10 mt-1 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
                     <div className="p-2 max-h-60 overflow-auto">
@@ -167,7 +147,7 @@ const UnifiedCostAnalysis = () => {
           </div>
           
           {/* KPI Cards */}
-          <h2 className="text-xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Key Metrics</h2>
+          <h2 className="text-xl font-semibold mb-4 text-cloudmetrix-baseText">Key Metrics</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {kpiData.map((kpi, index) => (
               <CostCard 
@@ -204,6 +184,12 @@ const UnifiedCostAnalysis = () => {
                     onClick={() => setTimeToggle('mom')}
                   >
                     MoM
+                  </button>
+                  <button 
+                    className={`px-3 py-1 text-sm rounded-md ${timeToggle === 'qoq' ? 'bg-white shadow-sm' : ''}`}
+                    onClick={() => setTimeToggle('qoq')}
+                  >
+                    QoQ
                   </button>
                   <button 
                     className={`px-3 py-1 text-sm rounded-md ${timeToggle === 'yoy' ? 'bg-white shadow-sm' : ''}`}

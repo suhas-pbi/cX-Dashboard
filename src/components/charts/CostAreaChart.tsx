@@ -1,8 +1,8 @@
 
 import React from 'react';
 import {
-  AreaChart,
-  Area,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -46,43 +46,29 @@ const formatYAxisTick = (value: number) => {
   return `$${value}`;
 };
 
-// Configuration for the chart
+// Configuration for the chart using a more muted color palette
 const chartConfig = {
   projected: {
     label: "Projected Cost",
-    color: "#6366f1",
+    color: "#6b7280", // Gray
   },
   actual: {
     label: "Actual Optimized Cost",
-    color: "#3b82f6",
+    color: "#4A6FA5", // CloudMetrix primary
   },
   savings: {
     label: "Savings Realized",
-    color: "#10b981",
+    color: "#4b5563", // Dark gray
   },
 };
 
 const CostAreaChart = () => {
   return (
     <ChartContainer config={chartConfig} className="h-64 w-full">
-      <AreaChart
+      <LineChart
         data={data}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
-        <defs>
-          <linearGradient id="colorProjected" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#6366f1" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#6366f1" stopOpacity={0.2} />
-          </linearGradient>
-          <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.2} />
-          </linearGradient>
-          <linearGradient id="colorSavings" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#10b981" stopOpacity={0.2} />
-          </linearGradient>
-        </defs>
         <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
         <XAxis dataKey="name" />
         <YAxis tickFormatter={formatYAxisTick} />
@@ -102,31 +88,34 @@ const CostAreaChart = () => {
           }}
         />
         <Legend />
-        <Area 
+        <Line 
           type="monotone" 
           dataKey="projected" 
           name="Projected Cost"
-          stroke="#6366f1" 
-          fillOpacity={1} 
-          fill="url(#colorProjected)" 
+          stroke="#6b7280"
+          strokeWidth={2}
+          dot={{ r: 4 }}
+          activeDot={{ r: 6 }}
         />
-        <Area 
+        <Line 
           type="monotone" 
           dataKey="actual" 
           name="Actual Optimized Cost"
-          stroke="#3b82f6" 
-          fillOpacity={1} 
-          fill="url(#colorActual)" 
+          stroke="#4A6FA5" 
+          strokeWidth={2}
+          dot={{ r: 4 }}
+          activeDot={{ r: 6 }}
         />
-        <Area 
+        <Line 
           type="monotone" 
           dataKey="savings" 
           name="Savings Realized"
-          stroke="#10b981" 
-          fillOpacity={1} 
-          fill="url(#colorSavings)" 
+          stroke="#4b5563" 
+          strokeWidth={2}
+          dot={{ r: 4 }}
+          activeDot={{ r: 6 }}
         />
-      </AreaChart>
+      </LineChart>
     </ChartContainer>
   );
 };
