@@ -3,16 +3,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Home, 
-  LineChart, 
-  Clock, 
-  Settings, 
-  BarChart, 
-  Zap, 
-  Shield, 
   ChartBar, 
   PieChart, 
+  SearchCheck, 
   LayoutDashboard, 
-  SearchCheck 
+  Settings
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -29,9 +24,9 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed left-0 top-0 h-full z-10 bg-cloudmetrix-accent shadow-lg flex items-center">
-      <div className="px-4 py-6">
-        <nav className="flex flex-col space-y-8">
+    <div className="fixed left-0 top-0 h-screen z-10 bg-cloudmetrix-accent shadow-lg">
+      <div className="h-full flex items-center">
+        <nav className="py-4 flex flex-col space-y-6">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             
@@ -44,8 +39,7 @@ const Sidebar = () => {
                       isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20 text-white'
                     }`}
                   >
-                    <item.icon className="h-5 w-5 mr-3" />
-                    <span className="text-sm whitespace-nowrap">{item.label}</span>
+                    <item.icon className="h-5 w-5" />
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="right">
