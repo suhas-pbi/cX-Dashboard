@@ -4,6 +4,13 @@ import CostAreaChart from '@/components/charts/CostAreaChart';
 import CostLineChart from '@/components/charts/CostLineChart';
 import CostPieChart from '@/components/charts/CostPieChart';
 import TopCostingFactorsChart from '@/components/charts/TopCostingFactorsChart';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ChartGridProps {
   timeToggle: string;
