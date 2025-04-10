@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import DashboardHeader from '@/components/DashboardHeader';
 import GenAICopilot from '@/components/GenAICopilot';
 import Sidebar from '@/components/Sidebar';
@@ -20,31 +20,50 @@ const BudgetingObservability = () => {
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const [selectedSubscription, setSelectedSubscription] = useState("All");
   
-  // Handle service filter change
-  const toggleService = (service: string) => {
+  // Memoize callback functions
+  const toggleService = useCallback((service: string) => {
     if (service === "All") {
       setSelectedServices(["All"]);
       return;
     }
     
-    let newSelected: string[];
-    
-    if (selectedServices.includes(service)) {
-      newSelected = selectedServices.filter(s => s !== service);
-    } else {
-      newSelected = selectedServices.includes("All") 
-        ? [service]
-        : [...selectedServices, service];
-    }
-    
-    if (newSelected.length === 0) {
-      newSelected = ["All"];
-    } else if (newSelected.length === 6) { // 6 is serviceOptions.length - 1
-      newSelected = ["All"];
-    }
-    
-    setSelectedServices(newSelected);
-  };
+    setSelectedServices(prev => {
+      let newSelected: string[];
+      
+      if (prev.includes(service)) {
+        newSelected = prev.filter(s => s !== service);
+      } else {
+        newSelected = prev.includes("All") 
+          ? [service]
+          : [...prev, service];
+      }
+      
+      if (newSelected.length === 0) {
+        newSelected = ["All"];
+      } else if (newSelected.length === 6) { // 6 is serviceOptions.length - 1
+        newSelected = ["All"];
+      }
+      
+      return newSelected;
+    });
+  }, []);
+
+  // Memoize handlers for budget settings
+  const handleBudgetChange = useCallback((value: number) => {
+    setBudgetValue(value);
+  }, []);
+  
+  const handleResourceChange = useCallback((value: string) => {
+    setSelectedResource(value);
+  }, []);
+  
+  const handleDepartmentChange = useCallback((value: string) => {
+    setSelectedDepartment(value);
+  }, []);
+  
+  const handleSubscriptionChange = useCallback((value: string) => {
+    setSelectedSubscription(value);
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -70,13 +89,13 @@ const BudgetingObservability = () => {
           {/* Section 1: Budget Slider */}
           <BudgetSlider 
             budgetValue={budgetValue}
-            setBudgetValue={setBudgetValue}
+            setBudgetValue={handleBudgetChange}
             selectedResource={selectedResource}
-            setSelectedResource={setSelectedResource}
+            setSelectedResource={handleResourceChange}
             selectedDepartment={selectedDepartment}
-            setSelectedDepartment={setSelectedDepartment}
+            setSelectedDepartment={handleDepartmentChange}
             selectedSubscription={selectedSubscription}
-            setSelectedSubscription={setSelectedSubscription}
+            setSelectedSubscription={handleSubscriptionChange}
           />
           
           {/* Section 2 & 3: Threshold Chart and Alerts Configuration side-by-side */}
@@ -95,4 +114,4 @@ const BudgetingObservability = () => {
   );
 };
 
-export default BudgetingObservability;
+export default React.memo(BudgetingObservability);

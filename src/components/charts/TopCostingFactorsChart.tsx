@@ -1,5 +1,5 @@
 
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import {
   BarChart,
   Bar,
@@ -49,8 +49,13 @@ const formatYAxisTick = (value: number) => {
 };
 
 const TopCostingFactorsChart = ({ topN }: TopCostingFactorsChartProps) => {
-  // Get the top N items based on cost
-  const data = React.useMemo(() => allData.slice(0, topN), [topN]);
+  // Get the top N items based on cost - memoized to prevent recalculation
+  const data = useMemo(() => allData.slice(0, topN), [topN]);
+  
+  // Memoize the formatter function to prevent recreation on each render
+  const tooltipFormatter = useMemo(() => (
+    (value: any) => [`${formatYAxisTick(value as number)}`, 'Cost']
+  ), []);
   
   return (
     <ChartContainer config={chartConfig} className="h-64 w-full">
@@ -63,7 +68,7 @@ const TopCostingFactorsChart = ({ topN }: TopCostingFactorsChartProps) => {
         <XAxis type="number" tickFormatter={formatYAxisTick} />
         <YAxis type="category" dataKey="name" width={80} />
         <Tooltip
-          formatter={(value) => [`${formatYAxisTick(value as number)}`, 'Cost']}
+          formatter={tooltipFormatter}
         />
         <Legend />
         <Bar dataKey="cost" name="Cost" fill="#6b98d4" radius={[0, 4, 4, 0]} />

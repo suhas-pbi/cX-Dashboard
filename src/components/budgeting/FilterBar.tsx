@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Calendar, Filter, ChevronDown } from 'lucide-react';
 import {
   Select,
@@ -16,14 +16,20 @@ interface FilterBarProps {
   toggleService: (service: string) => void;
 }
 
+// Service options defined outside component to prevent recreation
+const serviceOptions = ["All", "Compute", "Storage", "Networking", "Database", "AI/ML Services", "Load Balancers"];
+
 const FilterBar = ({ 
   selectedYear, 
   setSelectedYear, 
   selectedServices, 
   toggleService 
 }: FilterBarProps) => {
-  // Service filter options
-  const serviceOptions = ["All", "Compute", "Storage", "Networking", "Database", "AI/ML Services", "Load Balancers"];
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  
+  const toggleDropdown = useCallback(() => {
+    setDropdownOpen(prev => !prev);
+  }, []);
 
   return (
     <div className="bg-white rounded-xl p-4 mb-6 shadow-sm">
@@ -58,11 +64,11 @@ const FilterBar = ({
           <div className="relative">
             <button 
               className="flex items-center gap-2 px-3 py-2 bg-white border border-blue-100 rounded-md text-sm h-9 w-[180px]"
-              onClick={() => document.getElementById('serviceDropdown')?.classList.toggle('hidden')}
+              onClick={toggleDropdown}
             >
               Services <ChevronDown className="h-4 w-4 ml-auto" />
             </button>
-            <div id="serviceDropdown" className="hidden absolute z-10 mt-1 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
+            <div className={`${dropdownOpen ? 'block' : 'hidden'} absolute z-10 mt-1 w-56 bg-white border border-gray-200 rounded-md shadow-lg`}>
               <div className="p-2 max-h-60 overflow-auto">
                 {serviceOptions.map((service) => (
                   <div key={service} className="flex items-center p-2 hover:bg-blue-50 rounded">
@@ -85,4 +91,4 @@ const FilterBar = ({
   );
 };
 
-export default FilterBar;
+export default React.memo(FilterBar);

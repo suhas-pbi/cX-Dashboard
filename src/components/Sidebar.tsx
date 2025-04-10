@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Home, 
@@ -15,14 +15,15 @@ const Sidebar = () => {
   const location = useLocation();
   const [expanded, setExpanded] = React.useState(true);
   
-  const menuItems = [
+  // Memoize menu items to prevent recreation on each render
+  const menuItems = useMemo(() => [
     { icon: Home, label: 'Home', path: '/' },
     { icon: ChartBar, label: 'Unified Cost Analysis', path: '/cost-analysis' },
     { icon: PieChart, label: 'Budgeting & Observability', path: '/budgeting' },
     { icon: SearchCheck, label: 'Recommender Engine', path: '/recommender' },
     { icon: LayoutDashboard, label: 'Executive Dashboard', path: '/executive' },
     { icon: Settings, label: 'Settings', path: '/settings' }
-  ];
+  ], []);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -97,4 +98,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

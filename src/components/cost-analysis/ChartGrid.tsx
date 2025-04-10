@@ -1,5 +1,5 @@
 
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import CostAreaChart from '@/components/charts/CostAreaChart';
 import CostLineChart from '@/components/charts/CostLineChart';
 import CostPieChart from '@/components/charts/CostPieChart';
@@ -31,6 +31,12 @@ const ChartGrid: React.FC<ChartGridProps> = ({
   topN, 
   setTopN 
 }) => {
+  // Create memoized callback functions
+  const handleDailyClick = useCallback(() => setTimeToggle('daily'), [setTimeToggle]);
+  const handleMoMClick = useCallback(() => setTimeToggle('mom'), [setTimeToggle]);
+  const handleQoQClick = useCallback(() => setTimeToggle('qoq'), [setTimeToggle]);
+  const handleYoYClick = useCallback(() => setTimeToggle('yoy'), [setTimeToggle]);
+  
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
       {/* Projected vs Actual Optimized Cost */}
@@ -46,25 +52,25 @@ const ChartGrid: React.FC<ChartGridProps> = ({
           <div className="flex items-center gap-2 bg-gray-100 rounded-md p-1">
             <button 
               className={`px-3 py-1 text-sm rounded-md ${timeToggle === 'daily' ? 'bg-white shadow-sm' : ''}`}
-              onClick={() => setTimeToggle('daily')}
+              onClick={handleDailyClick}
             >
               Daily
             </button>
             <button 
               className={`px-3 py-1 text-sm rounded-md ${timeToggle === 'mom' ? 'bg-white shadow-sm' : ''}`}
-              onClick={() => setTimeToggle('mom')}
+              onClick={handleMoMClick}
             >
               MoM
             </button>
             <button 
               className={`px-3 py-1 text-sm rounded-md ${timeToggle === 'qoq' ? 'bg-white shadow-sm' : ''}`}
-              onClick={() => setTimeToggle('qoq')}
+              onClick={handleQoQClick}
             >
               QoQ
             </button>
             <button 
               className={`px-3 py-1 text-sm rounded-md ${timeToggle === 'yoy' ? 'bg-white shadow-sm' : ''}`}
-              onClick={() => setTimeToggle('yoy')}
+              onClick={handleYoYClick}
             >
               YoY
             </button>

@@ -11,33 +11,29 @@ interface KeyMetricsProps {
   }[];
 }
 
+// Icon mapping outside component to prevent recreation on each render
+const getIconForTitle = (title: string) => {
+  switch(title) {
+    case "Total Cost To Date":
+      return "dollar";
+    case "Projected Cost":
+      return "chart";
+    case "Savings":
+      return "target";
+    default:
+      return "activity";
+  }
+};
+
 const KeyMetrics: React.FC<KeyMetricsProps> = ({ kpiData }) => {
   // Map the KPI data to include icons based on the title
-  const kpiDataWithIcons = kpiData.map(kpi => {
-    let icon;
-    let timePeriod = "month";
-    
-    // Assign appropriate icon based on title
-    switch(kpi.title) {
-      case "Total Cost To Date":
-        icon = "dollar";
-        break;
-      case "Projected Cost":
-        icon = "chart";
-        break;
-      case "Savings":
-        icon = "target";
-        break;
-      default:
-        icon = "activity";
-    }
-    
+  const kpiDataWithIcons = React.useMemo(() => kpiData.map(kpi => {
     return {
       ...kpi,
-      icon,
-      timePeriod
+      icon: getIconForTitle(kpi.title),
+      timePeriod: "month"
     };
-  });
+  }), [kpiData]);
 
   return (
     <>
@@ -58,4 +54,4 @@ const KeyMetrics: React.FC<KeyMetricsProps> = ({ kpiData }) => {
   );
 };
 
-export default KeyMetrics;
+export default React.memo(KeyMetrics);
