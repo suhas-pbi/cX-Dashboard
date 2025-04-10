@@ -31,7 +31,7 @@ const Sidebar = () => {
   return (
     <div 
       className={`fixed left-0 top-0 h-screen z-10 bg-cloudmetrix-accent shadow-lg transition-all duration-300 ${
-        expanded ? 'w-64' : 'w-16'
+        expanded ? 'w-72' : 'w-16'
       }`}
     >
       <div className="h-full flex flex-col">
@@ -70,8 +70,8 @@ const Sidebar = () => {
                   isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20 text-white'
                 }`}
               >
-                <item.icon className="h-5 w-5 mr-3" />
-                <span className="transition-opacity duration-300">{item.label}</span>
+                <item.icon className="h-5 w-5 mr-3 flex-shrink-0" />
+                <span className="transition-opacity duration-300 whitespace-nowrap text-sm">{item.label}</span>
               </Link>
             ) : (
               <Tooltip key={index}>
