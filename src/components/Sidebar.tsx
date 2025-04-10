@@ -1,5 +1,5 @@
 
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Home, 
@@ -13,8 +13,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 
 const Sidebar = () => {
   const location = useLocation();
-  const [expanded, setExpanded] = React.useState(true);
-  const [previousPath, setPreviousPath] = React.useState(location.pathname);
+  // Changed default state to false (collapsed)
+  const [expanded, setExpanded] = useState(false);
+  const [previousPath, setPreviousPath] = useState(location.pathname);
   
   // Memoize menu items to prevent recreation on each render
   const menuItems = useMemo(() => [
@@ -38,11 +39,22 @@ const Sidebar = () => {
     setExpanded(!expanded);
   };
 
+  // Handle mouse enter and leave events for hover expand/collapse
+  const handleMouseEnter = () => {
+    setExpanded(true);
+  };
+
+  const handleMouseLeave = () => {
+    setExpanded(false);
+  };
+
   return (
     <div 
       className={`fixed left-0 top-0 h-screen z-10 bg-cloudmetrix-accent shadow-lg transition-all duration-300 ${
         expanded ? 'w-72' : 'w-16'
       }`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="h-full flex flex-col">
         {/* Toggle button */}
