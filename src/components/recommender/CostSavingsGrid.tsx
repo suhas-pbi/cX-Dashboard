@@ -8,6 +8,7 @@ import {
   Scale, 
   Boxes 
 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface CostSavingsGridProps {
   selectedServices: string[];
@@ -23,22 +24,24 @@ interface ResourceCardProps {
 
 const ResourceCard = ({ icon: Icon, iconColor, name, savings, bgColor }: ResourceCardProps) => {
   return (
-    <div 
-      className="bg-white rounded-xl shadow-sm p-5 cursor-pointer transition-all hover:shadow-md"
+    <Card 
+      className="transition-all duration-200 hover:shadow-md hover:translate-y-[-4px] border border-gray-100"
       onClick={() => console.log(`Clicked on ${name}`)}
     >
-      <div className="flex justify-between items-start">
-        <div className="flex-1">
-          <h3 className="font-medium text-gray-900 mb-1">{name}</h3>
-          <div className="text-lg font-bold text-gray-800">
-            ${savings.toLocaleString()}
+      <CardContent className="p-5">
+        <div className="flex justify-between items-start">
+          <div className="flex-1">
+            <h3 className="font-medium text-gray-900 mb-1">{name}</h3>
+            <div className="text-lg font-bold text-gray-800">
+              ${savings.toLocaleString()}
+            </div>
+          </div>
+          <div className={`p-3 rounded-lg ${bgColor}`}>
+            <Icon className={`h-6 w-6 ${iconColor}`} />
           </div>
         </div>
-        <div className={`p-3 rounded-lg ${bgColor}`}>
-          <Icon className={`h-6 w-6 ${iconColor}`} />
-        </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
