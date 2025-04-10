@@ -51,13 +51,13 @@ const RecommenderEngine = () => {
         />
         
         {/* Section 1: Potential Cost Savings by Resources */}
-        <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
+        <div className="bg-white rounded-xl p-6 shadow-sm mb-8 mx-4 mt-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Potential Cost Savings by Resources</h2>
           <CostSavingsGrid selectedServices={selectedServices} />
         </div>
         
         {/* Section 2: Cost Avoidance Table */}
-        <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
+        <div className="bg-white rounded-xl p-6 shadow-sm mb-8 mx-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Cost Avoidance</h2>
           <CostAvoidanceTable selectedServices={selectedServices} />
         </div>
