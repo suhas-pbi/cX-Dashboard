@@ -29,12 +29,12 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-1/2 transform -translate-x-1/2 z-10">
-      <div className="w-[600px] bg-cloudmetrix-accent text-white flex justify-center py-4 rounded-br-xl rounded-bl-xl shadow-lg">
+    <div className="sticky top-0 z-10 w-full">
+      <div className="w-full bg-cloudmetrix-accent text-white flex justify-center py-4 shadow-lg">
         <div className="bg-white p-2 rounded-lg absolute left-6">
           <div className="font-bold text-cloudmetrix-accent text-sm">CM</div>
         </div>
-        <nav className="flex items-center justify-center space-x-4 px-4">
+        <nav className="flex items-center justify-center space-x-4 px-4 max-w-[900px] mx-auto">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             
