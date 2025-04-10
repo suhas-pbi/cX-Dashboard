@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   BarChart,
@@ -30,11 +29,11 @@ const allData = [
   { name: 'Azure Functions', cost: 15000 },
 ];
 
-// Chart configuration
+// Chart configuration with the requested color
 const chartConfig = {
   cost: {
     label: "Cost",
-    color: "#3b82f6",
+    color: "#6b98d4",
   },
 };
 
@@ -66,13 +65,7 @@ const TopCostingFactorsChart = ({ topN }: TopCostingFactorsChartProps) => {
           formatter={(value) => [`${formatYAxisTick(value as number)}`, 'Cost']}
         />
         <Legend />
-        <defs>
-          <linearGradient id="costGradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.8} />
-            <stop offset="100%" stopColor="#6366f1" stopOpacity={0.8} />
-          </linearGradient>
-        </defs>
-        <Bar dataKey="cost" name="Cost" fill="url(#costGradient)" radius={[0, 4, 4, 0]} />
+        <Bar dataKey="cost" name="Cost" fill="#6b98d4" radius={[0, 4, 4, 0]} />
       </BarChart>
     </ChartContainer>
   );

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   LineChart,
@@ -75,7 +74,7 @@ const generateYoYData = () => {
   });
 };
 
-// Chart configuration using muted colors
+// Chart configuration with updated colors
 const chartConfig = {
   cost: {
     label: "Cost",
@@ -87,7 +86,7 @@ const chartConfig = {
   },
   lastYear: {
     label: "Last Year",
-    color: "#9CA3AF", // Light Gray
+    color: "#7E69AB", // Secondary Purple
   },
 };
 
@@ -117,17 +116,17 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
             name="This Year"
             stroke="#4A6FA5"
             strokeWidth={2}
-            dot={{ r: 4 }}
-            activeDot={{ r: 6 }}
+            dot={{ r: 3 }}
+            activeDot={{ r: 5 }}
           />
           <Line
             type="monotone"
             dataKey="lastYear"
             name="Last Year"
-            stroke="#9CA3AF"
+            stroke="#7E69AB"
             strokeWidth={2}
-            dot={{ r: 4 }}
-            activeDot={{ r: 6 }}
+            dot={{ r: 3 }}
+            activeDot={{ r: 5 }}
             strokeDasharray="5 5"
           />
         </>
@@ -142,8 +141,8 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
           name="Cost"
           stroke="#4A6FA5"
           strokeWidth={2}
-          dot={{ r: 5 }}
-          activeDot={{ r: 7 }}
+          dot={{ r: 3 }}
+          activeDot={{ r: 5 }}
         />
       );
       break;
