@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { memo } from 'react';
 import {
   BarChart,
   Bar,
@@ -7,7 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart';
 
@@ -15,7 +15,7 @@ interface TopCostingFactorsChartProps {
   topN: number;
 }
 
-// Mock data for the chart
+// Mock data for the chart - moved outside component to prevent recreating on each render
 const allData = [
   { name: 'AWS EC2', cost: 120000 },
   { name: 'Azure VMs', cost: 95000 },
@@ -29,7 +29,7 @@ const allData = [
   { name: 'Azure Functions', cost: 15000 },
 ];
 
-// Chart configuration with the requested color
+// Chart configuration with the requested color - moved outside component
 const chartConfig = {
   cost: {
     label: "Cost",
@@ -37,6 +37,7 @@ const chartConfig = {
   },
 };
 
+// Format function moved outside component to prevent recreation
 const formatYAxisTick = (value: number) => {
   if (value >= 1000000) {
     return `$${(value / 1000000).toFixed(1)}M`;
@@ -49,7 +50,7 @@ const formatYAxisTick = (value: number) => {
 
 const TopCostingFactorsChart = ({ topN }: TopCostingFactorsChartProps) => {
   // Get the top N items based on cost
-  const data = allData.slice(0, topN);
+  const data = React.useMemo(() => allData.slice(0, topN), [topN]);
   
   return (
     <ChartContainer config={chartConfig} className="h-64 w-full">
@@ -71,4 +72,4 @@ const TopCostingFactorsChart = ({ topN }: TopCostingFactorsChartProps) => {
   );
 };
 
-export default TopCostingFactorsChart;
+export default memo(TopCostingFactorsChart);

@@ -1,11 +1,25 @@
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import DashboardHeader from '@/components/DashboardHeader';
 import GenAICopilot from '@/components/GenAICopilot';
 import Sidebar from '@/components/Sidebar';
 import FilterBar from '@/components/cost-analysis/FilterBar';
 import KeyMetrics from '@/components/cost-analysis/KeyMetrics';
-import ChartGrid from '@/components/cost-analysis/ChartGrid';
+import { Skeleton } from '@/components/ui/skeleton';
+
+// Lazy load the chart grid component
+const ChartGrid = React.lazy(() => import('@/components/cost-analysis/ChartGrid'));
+
+const ChartGridSkeleton = () => (
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    {[1, 2, 3, 4].map((i) => (
+      <div key={i} className="bg-white p-4 rounded-xl shadow-sm">
+        <Skeleton className="h-4 w-48 mb-4" />
+        <Skeleton className="h-64 w-full" />
+      </div>
+    ))}
+  </div>
+);
 
 const UnifiedCostAnalysis = () => {
   // State for slicers
@@ -66,7 +80,7 @@ const UnifiedCostAnalysis = () => {
     <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       <Sidebar />
       
-      <div className="flex-1 ml-16"> {/* Reduced margin to match smaller sidebar */}
+      <div className="flex-1 ml-16">
         <div className="container mx-auto p-6">
           <DashboardHeader />
           
@@ -86,13 +100,15 @@ const UnifiedCostAnalysis = () => {
           {/* KPI Cards */}
           <KeyMetrics kpiData={kpiData} />
           
-          {/* Charts Grid */}
-          <ChartGrid 
-            timeToggle={timeToggle}
-            setTimeToggle={setTimeToggle}
-            topN={topN}
-            setTopN={setTopN}
-          />
+          {/* Charts Grid with Suspense for lazy loading */}
+          <Suspense fallback={<ChartGridSkeleton />}>
+            <ChartGrid 
+              timeToggle={timeToggle}
+              setTimeToggle={setTimeToggle}
+              topN={topN}
+              setTopN={setTopN}
+            />
+          </Suspense>
           
           <GenAICopilot />
         </div>

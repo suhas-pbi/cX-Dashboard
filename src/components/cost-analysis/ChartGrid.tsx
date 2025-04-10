@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import CostAreaChart from '@/components/charts/CostAreaChart';
 import CostLineChart from '@/components/charts/CostLineChart';
 import CostPieChart from '@/components/charts/CostPieChart';
@@ -19,6 +19,12 @@ interface ChartGridProps {
   setTopN: (n: string) => void;
 }
 
+// Memoize individual chart components to prevent unnecessary re-renders
+const MemoizedCostAreaChart = memo(CostAreaChart);
+const MemoizedCostLineChart = memo(CostLineChart);
+const MemoizedCostPieChart = memo(CostPieChart);
+const MemoizedTopCostingFactorsChart = memo(TopCostingFactorsChart);
+
 const ChartGrid: React.FC<ChartGridProps> = ({ 
   timeToggle, 
   setTimeToggle, 
@@ -30,7 +36,7 @@ const ChartGrid: React.FC<ChartGridProps> = ({
       {/* Projected vs Actual Optimized Cost */}
       <div className="bg-white p-4 rounded-xl shadow-sm">
         <h3 className="text-lg font-medium mb-4">Projected vs Actual Optimized Cost</h3>
-        <CostAreaChart />
+        <MemoizedCostAreaChart />
       </div>
       
       {/* Cost Analysis Over Time */}
@@ -64,13 +70,13 @@ const ChartGrid: React.FC<ChartGridProps> = ({
             </button>
           </div>
         </div>
-        <CostLineChart timeToggle={timeToggle} />
+        <MemoizedCostLineChart timeToggle={timeToggle} />
       </div>
       
       {/* Cost Distribution per Resource Buckets */}
       <div className="bg-white p-4 rounded-xl shadow-sm">
         <h3 className="text-lg font-medium mb-4">Cost Distribution per Resource</h3>
-        <CostPieChart />
+        <MemoizedCostPieChart />
       </div>
       
       {/* Top "n" Costing Factors */}
@@ -91,10 +97,10 @@ const ChartGrid: React.FC<ChartGridProps> = ({
             </SelectContent>
           </Select>
         </div>
-        <TopCostingFactorsChart topN={parseInt(topN)} />
+        <MemoizedTopCostingFactorsChart topN={parseInt(topN)} />
       </div>
     </div>
   );
 };
 
-export default ChartGrid;
+export default memo(ChartGrid);
