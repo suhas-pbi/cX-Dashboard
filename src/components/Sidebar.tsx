@@ -29,35 +29,35 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-10 w-full shadow-md">
-      <div className="bg-cloudmetrix-accent text-white py-4">
-        <div className="container mx-auto px-4">
-          <div className="relative flex items-center justify-center">
-            <div className="absolute left-0">
-              <div className="bg-white p-2 rounded-lg">
-                <div className="font-bold text-cloudmetrix-accent text-sm">CM</div>
-              </div>
-            </div>
-            <nav className="flex items-center justify-center space-x-4 max-w-[900px] overflow-x-auto scrollbar-none">
-              {menuItems.map((item, index) => {
-                const isActive = location.pathname === item.path;
-                
-                return (
+    <div className="fixed left-0 top-1/2 -translate-y-1/2 z-10 h-auto bg-cloudmetrix-accent rounded-r-lg shadow-lg">
+      <div className="px-2 py-6">
+        <div className="bg-white p-2 rounded-lg mb-6 mx-auto w-10 h-10 flex items-center justify-center">
+          <div className="font-bold text-cloudmetrix-accent text-sm">CM</div>
+        </div>
+        <nav className="flex flex-col space-y-4">
+          {menuItems.map((item, index) => {
+            const isActive = location.pathname === item.path;
+            
+            return (
+              <Tooltip key={index}>
+                <TooltipTrigger asChild>
                   <Link 
-                    key={index}
                     to={item.path} 
-                    className={`flex items-center p-2 rounded-md transition-colors duration-200 ${
-                      isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20'
+                    className={`flex flex-col items-center p-2 rounded-md transition-colors duration-200 ${
+                      isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20 text-white'
                     }`}
                   >
-                    <item.icon className="h-5 w-5 mr-2" />
-                    <span className="text-sm whitespace-nowrap">{item.label}</span>
+                    <item.icon className="h-5 w-5" />
+                    <span className="text-xs mt-1 text-center whitespace-nowrap">{item.label}</span>
                   </Link>
-                );
-              })}
-            </nav>
-          </div>
-        </div>
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  {item.label}
+                </TooltipContent>
+              </Tooltip>
+            );
+          })}
+        </nav>
       </div>
     </div>
   );
