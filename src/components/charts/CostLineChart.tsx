@@ -79,15 +79,15 @@ const generateYoYData = () => {
 const chartConfig = {
   cost: {
     label: "Cost",
-    color: "#4A6FA5", // CloudMetrix primary
+    color: "#4a6fa5", // Updated color
   },
   thisYear: {
     label: "This Year",
-    color: "#4A6FA5", // CloudMetrix primary
+    color: "#4a6fa5", // Updated color
   },
   lastYear: {
     label: "Last Year",
-    color: "#7E69AB", // Secondary Purple
+    color: "#7e69ab", // Updated color
   },
 };
 
@@ -115,7 +115,7 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
             type="monotoneX"
             dataKey="thisYear"
             name="This Year"
-            stroke="#4A6FA5"
+            stroke="#4a6fa5" // Updated color
             strokeWidth={2}
             dot={{ r: 2 }}
             activeDot={{ r: 4 }}
@@ -124,7 +124,7 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
             type="monotoneX"
             dataKey="lastYear"
             name="Last Year"
-            stroke="#7E69AB"
+            stroke="#7e69ab" // Updated color
             strokeWidth={2}
             dot={{ r: 2 }}
             activeDot={{ r: 4 }}
@@ -140,7 +140,7 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
           type="monotoneX"
           dataKey="cost"
           name="Cost"
-          stroke="#4A6FA5"
+          stroke="#4a6fa5" // Updated color
           strokeWidth={2}
           dot={{ r: 2 }}
           activeDot={{ r: 4 }}
@@ -155,7 +155,7 @@ const CostLineChart = ({ timeToggle }: CostLineChartProps) => {
           type="monotoneX"
           dataKey="cost"
           name="Cost"
-          stroke="#4A6FA5"
+          stroke="#4a6fa5" // Updated color
           strokeWidth={2}
           dot={{ r: 2 }}
           activeDot={{ r: 4 }}

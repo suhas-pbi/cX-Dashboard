@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   LineChart,
@@ -46,19 +45,19 @@ const formatYAxisTick = (value: number) => {
   return `$${value}`;
 };
 
-// Configuration for the chart using a more muted color palette
+// Configuration for the chart using the specified color palette
 const chartConfig = {
   projected: {
     label: "Projected Cost",
-    color: "#6b7280", // Gray
+    color: "#8e9196", // Updated color
   },
   actual: {
     label: "Actual Optimized Cost",
-    color: "#4A6FA5", // CloudMetrix primary
+    color: "#4a6fa5", // Updated color
   },
   savings: {
     label: "Savings Realized",
-    color: "#4b5563", // Dark gray
+    color: "#7e69ab", // Updated color
   },
 };
 
@@ -92,7 +91,7 @@ const CostAreaChart = () => {
           type="monotoneX" 
           dataKey="projected" 
           name="Projected Cost"
-          stroke="#6b7280"
+          stroke="#8e9196" // Updated color
           strokeWidth={2}
           dot={{ r: 2 }}
           activeDot={{ r: 4 }}
@@ -101,7 +100,7 @@ const CostAreaChart = () => {
           type="monotoneX" 
           dataKey="actual" 
           name="Actual Optimized Cost"
-          stroke="#4A6FA5" 
+          stroke="#4a6fa5" // Updated color
           strokeWidth={2}
           dot={{ r: 2 }}
           activeDot={{ r: 4 }}
@@ -110,7 +109,7 @@ const CostAreaChart = () => {
           type="monotoneX" 
           dataKey="savings" 
           name="Savings Realized"
-          stroke="#4b5563" 
+          stroke="#7e69ab" // Updated color
           strokeWidth={2}
           dot={{ r: 2 }}
           activeDot={{ r: 4 }}
