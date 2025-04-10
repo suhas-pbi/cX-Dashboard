@@ -79,7 +79,7 @@ const UnifiedCostAnalysis = () => {
     <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       <Sidebar />
       
-      <div className="flex-1 ml-20">
+      <div className="flex-1 ml-64">
         <div className="container mx-auto p-6">
           <DashboardHeader />
           

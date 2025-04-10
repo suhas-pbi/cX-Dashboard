@@ -29,12 +29,9 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed left-0 top-1/2 -translate-y-1/2 z-10 h-auto bg-cloudmetrix-accent rounded-r-lg shadow-lg">
-      <div className="px-2 py-6">
-        <div className="bg-white p-2 rounded-lg mb-6 mx-auto w-10 h-10 flex items-center justify-center">
-          <div className="font-bold text-cloudmetrix-accent text-sm">CM</div>
-        </div>
-        <nav className="flex flex-col space-y-4">
+    <div className="fixed left-0 top-0 h-full z-10 bg-cloudmetrix-accent shadow-lg flex items-center">
+      <div className="px-4 py-6">
+        <nav className="flex flex-col space-y-8">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             
@@ -43,12 +40,12 @@ const Sidebar = () => {
                 <TooltipTrigger asChild>
                   <Link 
                     to={item.path} 
-                    className={`flex flex-col items-center p-2 rounded-md transition-colors duration-200 ${
+                    className={`flex items-center p-2 rounded-md transition-colors duration-200 ${
                       isActive ? 'bg-white text-cloudmetrix-accent' : 'hover:bg-white/20 text-white'
                     }`}
                   >
-                    <item.icon className="h-5 w-5" />
-                    <span className="text-xs mt-1 text-center whitespace-nowrap">{item.label}</span>
+                    <item.icon className="h-5 w-5 mr-3" />
+                    <span className="text-sm whitespace-nowrap">{item.label}</span>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="right">
