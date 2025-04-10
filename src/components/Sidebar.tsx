@@ -6,8 +6,7 @@ import {
   ChartBar, 
   PieChart, 
   SearchCheck, 
-  LayoutDashboard, 
-  Settings
+  LayoutDashboard
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -23,8 +22,7 @@ const Sidebar = () => {
     { icon: ChartBar, label: 'Unified Cost Analysis', path: '/cost-analysis' },
     { icon: PieChart, label: 'Budgeting & Observability', path: '/budgeting' },
     { icon: SearchCheck, label: 'Recommender Engine', path: '/recommender' },
-    { icon: LayoutDashboard, label: 'Executive Dashboard', path: '/executive' },
-    { icon: Settings, label: 'Settings', path: '/settings' }
+    { icon: LayoutDashboard, label: 'Executive Dashboard', path: '/executive' }
   ], []);
 
   // Collapse sidebar when navigating to a different page
