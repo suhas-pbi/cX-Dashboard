@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Home, 
@@ -14,6 +14,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 const Sidebar = () => {
   const location = useLocation();
   const [expanded, setExpanded] = React.useState(true);
+  const [previousPath, setPreviousPath] = React.useState(location.pathname);
   
   // Memoize menu items to prevent recreation on each render
   const menuItems = useMemo(() => [
@@ -24,6 +25,14 @@ const Sidebar = () => {
     { icon: LayoutDashboard, label: 'Executive Dashboard', path: '/executive' },
     { icon: Settings, label: 'Settings', path: '/settings' }
   ], []);
+
+  // Collapse sidebar when navigating to a different page
+  useEffect(() => {
+    if (location.pathname !== previousPath) {
+      setExpanded(false);
+      setPreviousPath(location.pathname);
+    }
+  }, [location.pathname, previousPath]);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
